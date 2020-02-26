@@ -1,0 +1,70 @@
+\documentclass[12pt, letterpaper]{article}
+
+\title{CSE 3241 Checkpoint 2}
+\author{Wally Yang}
+\date{\today}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{amsmath}
+\setlength{\jot}{12pt} % set the vertical spacing between lines
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  gobble=10,
+  tabsize=2
+}
+\lstset{style=mystyle}
+
+\begin{document}
+\maketitle
+
+\begin{align*}
+  &\textit{BOOKS} \leftarrow \textit{BOOK} \bowtie_{\textit{Isbn} = \textit{Book}} (\sigma_{\textit{Customer}=\textit{Email}}(\textit{PURCHASE}))\\
+  &\textit{SALE} \leftarrow \textit{SALE\_RECORD} \bowtie_{\textit{Transaction\_id} = \textit{Sale}} (\textit{BOOKS})\\
+  &\textit{RESULT} \leftarrow \pi_{Title, Date} (\textit{SALE})
+\end{align*}
+
+\begin{align*}
+  &\textit{STOCK(Isbn, Quantity)} \leftarrow _{\textit{Isbn}}\mathcal{F}_{\textit{SUM Quantity}}(\textit{INVENTORY})\\
+  &\textit{RESULT} \leftarrow \pi_{\textit{Title}, \textit{Isbn}}(\sigma_{\textit{Quantity} < 5}(STOCK))
+\end{align*}
+
+\begin{align*}
+  &\textit{SALES} \leftarrow \sigma_{\textit{Author} = \textit{Pratchett}}(\textit{PUBLISH})\\
+  &\textit{PRATCHETTS} \leftarrow (\textit{BOOK} * \textit{SALES})\\
+  &\textit{RESULT} \leftarrow (\pi_{\textit{Name}, \textit{Title}}(PRATCHETTS))
+\end{align*}
+
+\begin{align*}
+  &\textit{COUNT(Customer, \# of Books)} \leftarrow _{\textit{Customer}}\mathcal{F}_{\textit{COUNT SALE}}(\textit{PURCHASE})\\
+  &\textit{RESULT} \leftarrow \sigma_{\textit{Customer} = \textit{Email}}(\textit{COUNT})
+\end{align*}
+
+\begin{align*}
+  &\textit{COUNT(Customer, No)} \leftarrow _{\textit{Customer}}\mathcal{F}_{\textit{COUNT SALE}}(\textit{PURCHASE})\\
+  &\textit{RESULT} \leftarrow \mathcal{F}_{\textit{MAX No}}(\textit{COUNT})
+\end{align*}
+
+\end{document}

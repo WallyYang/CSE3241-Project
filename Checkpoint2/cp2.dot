@@ -1,0 +1,92 @@
+graph ER {
+    // Entities
+    DISCOUNT [label="DISCOUNT", shape=box];
+    BOOK [label="BOOK", shape=box];
+    AUTHOR [label="AUTHOR", shape=box];
+    PUBLISHER [label="PUBLISHER", shape=box];
+    CUSTOMER [label="CUSTOMER", shape=box];
+    INVENTORY [label="INVENTORY", shape=box];
+    ACCOUNT [label="ACCOUNT", shape=box, peripheries=2];
+    GIFT [label="GIFT", shape=box, peripheries=2];
+
+    // Attributes
+    Isbn [label=<<u>Isbn</u>>, shape=ellipse, fontsize=10];
+    Title [label="Title", shape=ellipse, fontsize=10];
+    Year [label="Year", shape=ellipse, fontsize=10];
+    Price [label="Price", shape=ellipse, fontsize=10];
+    Category [label="Category", shape=ellipse, fontsize=10];
+
+    { Isbn, Title } -- BOOK[minlen="1"];
+    BOOK -- { Year, Price, Category };
+
+    Name3 [label=<<u>Name</u>>, shape=ellipse, fontsize=10];
+    Name3 -- AUTHOR;
+
+    Name [label=<<u>Name</u>>, shape=ellipse, fontsize=10];
+    Phone [label="Phone", shape=ellipse, fontsize=10];
+    Address [label="Address", shape=ellipse, fontsize=10];
+
+    { Name, Phone, Address } -- PUBLISHER;
+
+    Email [label=<<u>Email</u>>, shape=ellipse, fontsize=10];
+    Name2 [label="Name", shape=ellipse, fontsize=10];
+    Address2 [label="Address", shape=ellipse, fontsize=10];
+    Phone2 [label="Phone", shape=ellipse, fontsize=10];
+
+    { Email, Name2, Address2, Phone2 } -- CUSTOMER;
+
+    Location [label="Location", shape=ellipse, fontsize=10];
+    Quantity [label="Quantity", shape=ellipse, fontsize=10];
+
+    INVENTORY -- { Location, Quantity };
+
+    Transaction_Id [label=<<u>Transaction_Id</u>>, shape=ellipse, fontsize=10];
+    Date [label="Date", shape=ellipse, fontsize=10];
+    Card_Type [label="Card_Type", shape=ellipse, fontsize=10];
+
+    Purchases -- { Transaction_Id, Date, Card_Type };
+
+    Acct_No [label=<<u>A</u>c<u>c</u>t<u>_</u>N<u>o</u>>, shape=ellipse, fontsize=10];
+    Reward_Point [label="Reward_Point", shape=ellipse, fontsize=10];
+    Recommendation_List [label="Recommendation_List", shape=ellipse, fontsize=10];
+    Membership [label="Membership", shape=ellipse, fontsize=10];
+
+    ACCOUNT -- { Acct_No, Reward_Point, Recommendation_List, Membership };
+
+    Percentage [label="Percentage", shape=ellipse fontsize=10];
+    Buy_Limit [label="Buy_Limit", shape=ellipse fontsize=10];
+
+    DISCOUNT -- { Percentage, Buy_Limit };
+
+    Type [label="Type", shape=ellipse, fontsize=10];
+
+    GIFT -- Type;
+
+    // Relationships
+    Publishes [label="Publishes", shape=diamond]
+    Purchases [label="Purchases", shape=diamond]
+    Stores_At[label="Stores_At", shape=diamond]
+    Has [label="Has", shape=diamond, peripheries=2]
+    Applies_On [label="Applies_On", shape=diamond]
+    Rewards_To [label="Rewards_To", shape=diamond, peripheries=2]
+
+    GIFT -- Rewards_To[label="N", color="black:black"];
+    Rewards_To -- CUSTOMER[label="1"];
+    CUSTOMER -- Has[label="1"];
+    Has -- ACCOUNT[label="1", color="black:black"];
+
+    subgraph apply {
+        rank = same;
+        DISCOUNT -- Applies_On[label="1", color="black:black"];
+        Applies_On -- BOOK[label="N"];
+    }
+
+    CUSTOMER -- Purchases[label="M"];
+    Purchases -- BOOK[label="N"];
+    AUTHOR -- Publishes[label="M", color="black:black"];
+    PUBLISHER -- Publishes[label="1", color="black:black"];
+    Publishes -- BOOK[label="N", color="black:black"];
+    BOOK -- Stores_At[label="N", color="black:black"];
+    Stores_At -- INVENTORY[label="M"];
+
+}
