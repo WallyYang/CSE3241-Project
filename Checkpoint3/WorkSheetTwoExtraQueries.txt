@@ -1,0 +1,5 @@
+Find the CUSTOMER with the most Reward_point on his/her account
+	
+Find the most expensive BOOK with all the DISCOUNT applied
+	
+Find the total price of all the BOOK for each stock (quantity * price)
