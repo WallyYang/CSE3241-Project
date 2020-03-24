@@ -1,11 +1,10 @@
 SELECT Email, Name
 FROM (CUSTOMER NATURAl JOIN ACCOUNT)
-HAVING MAX(Reward_point);
+WHERE Reward_point=MAX(Reward_point);
 
 SELECT Isbn, Title
 FROM (BOOK LEFT OUTER JOIN DISCOUNT)
-WHERE Percentage IS NOT NULL
-HAVING MAX(Price*Percentage);
+WHERE Percentage IS NOT NULL AND Price*Percentage=MAX(Price*Percentage);
 
 SELECT Isbn, Stock*Price
 FROM BOOK NATURAL JOIN INVENTORY
