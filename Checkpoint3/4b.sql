@@ -4,4 +4,4 @@ SELECT C.Name, C.Email
           FROM PURCHASE AS P
          GROUP BY P.Customer) AS R1
  WHERE R1.Customer = C.Email AND R1.Total > AVG(R1.Customer)
- GROUP BY P.Customer
+ GROUP BY R1.Customer
