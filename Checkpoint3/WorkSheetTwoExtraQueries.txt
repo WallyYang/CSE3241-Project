@@ -1,5 +1,12 @@
-Find the CUSTOMER with the most Reward_point on his/her account
-	
-Find the most expensive BOOK with all the DISCOUNT applied
-	
-Find the total price of all the BOOK for each stock (quantity * price)
+SELECT Email, Name
+FROM (CUSTOMER NATURAl JOIN ACCOUNT)
+HAVING MAX(Reward_point);
+
+SELECT Isbn, Title
+FROM (BOOK LEFT OUTER JOIN DISCOUNT)
+WHERE Percentage IS NOT NULL
+HAVING MAX(Price*Percentage);
+
+SELECT Isbn, Stock*Price
+FROM BOOK NATURAL JOIN INVENTORY
+WHERE Stock=SUM(Quantity) ;
