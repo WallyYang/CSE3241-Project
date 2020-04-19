@@ -32,13 +32,13 @@ CREATE TABLE PUBLISHER(
   PRIMARY KEY(Name)
 );
 
--- CUSTOMER table
-CREATE TABLE CUSTOMER(
-  Email VARCHAR(100) NOT NULL,
-  Name VARCHAR(100) NOT NULL,
-  Phone CHAR(11),
-  Address VARCHAR(100) NOT NULL,
-  PRIMARY KEY(Email)
+-- PUBLISHES table, specify the publisher of each book
+CREATE TABLE PUBLISHES(
+  Isbn CHAR(13) NOT NULL,
+  Publisher VARCHAR(100) NOT NULL,
+  PRIMARY KEY(Isbn, Publisher),
+  FOREIGN KEY(Isbn) REFERENCES BOOK(Isbn),
+  FOREIGN KEY(Publisher) REFERENCES PUBLISHER(Name)
 );
 
 -- DISCOUNT table, specify the current discounts on books
@@ -48,6 +48,15 @@ CREATE TABLE DISCOUNT(
   Percentage REAL NOT NULL,
   PRIMARY KEY(Isbn),
   FOREIGN KEY(Isbn) REFERENCES BOOK(Isbn)
+);
+
+-- CUSTOMER table
+CREATE TABLE CUSTOMER(
+  Email VARCHAR(100) NOT NULL,
+  Name VARCHAR(100) NOT NULL,
+  Phone CHAR(11),
+  Address VARCHAR(100) NOT NULL,
+  PRIMARY KEY(Email)
 );
 
 -- ACCOUNT table, stores customers with member accounts
@@ -74,15 +83,6 @@ CREATE TABLE WRITES(
   PRIMARY KEY(Isbn, AuthorId),
   FOREIGN KEY(Isbn) REFERENCES BOOK(Isbn),
   FOREIGN KEY(AuthorId) REFERENCES AUTHOR(AuthorId)
-);
-
--- PUBLISHES table, specify the publisher of each book
-CREATE TABLE PUBLISHES(
-  Isbn CHAR(13) NOT NULL,
-  Publisher VARCHAR(100) NOT NULL,
-  PRIMARY KEY(Isbn, Publisher),
-  FOREIGN KEY(Isbn) REFERENCES BOOK(Isbn),
-  FOREIGN KEY(Publisher) REFERENCES PUBLISHER(Name)
 );
 
 -- PURCHASE table, stores each book sale
