@@ -1,3 +1,6 @@
 SELECT C.Email, C.Name, B.Title
-  FROM CUSTOMER AS C, BOOK AS B, PUBLISHES AS P, PURCHASE AS PUR
- WHERE P.Isbn = B.Isbn AND P.Author = 'Pratchett' AND PUR.Book = B.Isbn;
+  FROM CUSTOMER AS C, BOOK AS B, PURCHASE AS PUR,
+       WRITES AS W, AUTHOR AS A
+ WHERE PUR.Book = B.Isbn AND PUR.Customer = C.Email
+   AND W.AuthorId = A.AuthorId
+   AND A.Name = 'Terry Pratchett';

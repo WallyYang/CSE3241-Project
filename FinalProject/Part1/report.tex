@@ -196,7 +196,7 @@
 
     \begin{align*}
       &\mathit{R1} \leftarrow \mathit{BOOK} * \mathit{WRITES} * \mathit{AUTHOR}\\
-      &\mathit{R2} \leftarrow \sigma_{\mathit{A.Name} = \textit{Terry Pratchett}}(R1)\\
+      &\mathit{R2} \leftarrow \sigma_{\mathit{Name} = \textit{Terry Pratchett}}(R1)\\
       &\mathit{RESULT} \leftarrow \pi_{\mathit{Title}, \mathit{Name}}(\mathit{R1})
     \end{align*}
 
@@ -241,9 +241,10 @@
     Return a table that contains the customers who purchased a book by Pratchett and the titles of Pratchett books they purchased
 
     \begin{align*}
-      &\textit{PRATCHETTS} \leftarrow (\sigma_{\textit{Author} = \textit{Pratchett}}(\textit{PUBLISH}) * \textit{BOOK})\\
-      &\textit{SALES} \leftarrow (\textit{PRATCHETTS} * \textit{PURCHASE})\\
-      &\textit{RESULT} \leftarrow (\pi_{\textit{Email}, \textit{Name}, \textit{Title}}(\textit{SALES}))
+      &R1 \leftarrow \sigma_{Name = 'Terry Pratchett'}AUTHOR * WRITES * BOOK\\
+      &R2 \leftarrow BOOK \bowtie_{Book.Isbn = PURCHASE.Book}PURCHASE\\
+      &R3 \leftarrow R2\bowtie_{PURCHASE.Customer = CUSTOMER.Email} CUSTOMER\\
+      &Result \leftarrow \pi_{R2.Name, R1.Title}(R3 * R1)
     \end{align*}
 
     \inputminted[
