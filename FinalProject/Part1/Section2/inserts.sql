@@ -58,6 +58,14 @@ VALUES ('782140661',                        -- ISBN
         0.7                                 -- Discount Percentage
 );
 
+INSERT INTO BOOK
+VALUES ('782140661',                        -- ISBN
+        'OCP: Oracle9i Certification Kit',  -- Title
+        2002,                               -- Year
+        104.97,                             -- Price
+        'Computer'                          -- Category
+);
+
 -- Insert CUSTOMER information
 INSERT INTO CUSTOMER
 VALUES ('brutus.1@osu.edu',                     -- Email
