@@ -1,5 +1,3 @@
-SELECT Isbn, Title
+SELECT BOOK.Isbn, Title, MAX(Price*Percentage)
   FROM (BOOK LEFT OUTER JOIN DISCOUNT)
- WHERE Percentage IS NOT NULL
- GROUP BY Isbn, Title
-HAVING Price*Percentage = MAX(Price*Percentage);
+ WHERE BOOK.Isbn = DISCOUNT.Isbn
