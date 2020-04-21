@@ -196,6 +196,7 @@
 
     \begin{align*}
       &\mathit{R1} \leftarrow \mathit{BOOK} * \mathit{WRITES} * \mathit{AUTHOR}\\
+      &\mathit{R2} \leftarrow \sigma_{\mathit{A.Name} = \textit{Terry Pratchett}}(R1)\\
       &\mathit{RESULT} \leftarrow \pi_{\mathit{Title}, \mathit{Name}}(\mathit{R1})
     \end{align*}
 
