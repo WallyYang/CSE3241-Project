@@ -2,7 +2,7 @@ import sqlite3
 connection = sqlite3.connect('bookstore.sqlite')
 cursor = connection.cursor()
 
-#pormote book info
+#promote book info
 Isbn = input("Enter the Isbn of the book: ")
 title = input("Enter the title of the book: ")
 year = input("Enter the year of the book: ")
