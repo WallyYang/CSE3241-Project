@@ -68,7 +68,7 @@ DELETE FROM WRITES
 
 -- Delete a CUSTOMER
 DELETE FROM ACCOUNT
- WHERE Email = 'email@email.com'
+ WHERE Email = 'email@email.com';
 
 DELETE FROM CUSTOMER
- WHERE Email = 'email@email.com'
+ WHERE Email = 'email@email.com';
