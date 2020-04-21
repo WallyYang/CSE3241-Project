@@ -179,6 +179,8 @@
 
 \end{enumerate}
 
+\pagebreak
+
 \section{User Manual}
 \begin{enumerate}
 \item Database Description
@@ -192,14 +194,290 @@
 
     Return a table that contains the title of that books written by Pratchett and cost less than \$10
 
+    \begin{equation*}
+      BOOKS \leftarrow \Pi_{Title}(\sigma_{Price<10 AND Author = 'Pratchett'}(BOOK))
+    \end{equation*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_a.sql}
+
   \item Find the titles of all books by Pratchett that cost less than \$10
+
+    Return a table that contains the title and date of the purchases made by a single customer
+
+    \begin{align*}
+      &\textit{BOOKS} \leftarrow \textit{BOOK} \bowtie_{\textit{Isbn} = \textit{Book}} (\sigma_{\textit{Customer}=\textit{Email}}(\textit{PURCHASE}))\\
+      &\textit{RESULT} \leftarrow \pi_{Title, Date} (\textit{BOOK})
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_b.sql}
 
   \item Find the titles and ISBNs for all books with less than 5 copies in stock
 
+    Return a table that contains the title and ISBN for all books with less than 5 copies in inventory
+
+    \begin{align*}
+      &\textit{STOCK(Isbn, Quantity)} \leftarrow _{\textit{Isbn}}\mathcal{F}_{\textit{SUM Quantity}}(\textit{INVENTORY})\\
+      &\textit{RESULT} \leftarrow \pi_{\textit{Title}, \textit{Isbn}}(\sigma_{\textit{Quantity} < 5}(\textit{STOCK}))
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_c.sql}
+
   \item Give all the customers who purchased a book by Pratchett and the titles of Pratchett books they purchased
 
-  \item
+    Return a table that contains the customers who purchased a book by Pratchett and the titles of Pratchett books they purchased
+
+    \begin{align*}
+      &\textit{PRATCHETTS} \leftarrow (\sigma_{\textit{Author} = \textit{Pratchett}}(\textit{PUBLISH}) * \textit{BOOK})\\
+      &\textit{SALES} \leftarrow (\textit{PRATCHETTS} * \textit{PURCHASE})\\
+      &\textit{RESULT} \leftarrow (\pi_{\textit{Email}, \textit{Name}, \textit{Title}}(\textit{SALES}))
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_d.sql}
+
+  \item Find the total number of books purchased by a single customer
+
+    Return a table that contains the total number of books a customer has purchased and the email of the customer
+
+    \begin{align*}
+      &\textit{COUNT(Customer, \# of Books)} \leftarrow _{\textit{Customer}}\mathcal{F}_{\textit{COUNT BOOK}}(\textit{PURCHASE})\\
+      &\textit{RESULT} \leftarrow \sigma_{\textit{Customer} = \textit{Email}}(\textit{COUNT})
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_e.sql}
+
+  \item Find the customer who has purchased the most books and the total number of books they have purchased
+
+    Return a table that contains the customer who has purchased the most books and the amount of the books they have purchased
+
+
+    \begin{align*}
+      &\textit{COUNT(Customer, No)} \leftarrow _{\textit{Customer}}\mathcal{F}_{\textit{COUNT BOOK}}(\textit{PURCHASE})\\
+      &\textit{RESULT} \leftarrow _{\textit{Customer}}\mathcal{F}_{\textit{MAX No}}(\textit{COUNT})
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_f.sql}
+
+  \item Find the CUSTOMER with the most Reward\_point on his or her account
+
+    Return a table that contains the email and name of the customer who has the most reward point on his or her account
+
+    \begin{align*}
+      &\textit{RESULT} \leftarrow \pi_{\textit{Email, Name}}(_{\textit{Email, Name}}\mathcal{F}_{\textit{MAX Reward\_point}}(\textit{CACCT}))
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_g.sql}
+
+  \item Return a table that contains the email and name of the customer who has the most reward point on his or her account
+
+    Return a table that contains ISBN and title of books that has the most expensive price with applied discount
+
+    \begin{align*}
+      &\textit{DIS\_BOOKS} \leftarrow \textit{BOOK} \leftouterjoin \textit{DISCOUNT}\\
+      &\textit{RESULT} \leftarrow _{\textit{Isbn, Title}}\mathcal{F}_{\textit{MAX} (\textit{Price} * \textit{percentage})}(\textit{DIS\_BOOKS})
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_h.sql}
+
+  \item Find the total price of all the BOOK for each stock (quantity * price)
+
+    Return a table that contains the total price of all the books and their ISBN for each stock
+
+    \begin{align*}
+      &\textit{STOCK} \leftarrow \textit{BOOK} * _{\textit{Isbn}}\mathcal{F}_{\textit{SUM Quantity}}(\textit{INVENTORY})\\
+      &\textit{RESULT} \leftarrow \pi_{\textit{Isbn}, \textit{Quantity * Price}}(\textit{STOCK})
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_i.sql}
+
+
+  \item Provide a list of customer names, along with the total dollar amount each customer has spent.
+
+    Provide a list of customer names, along with the total dollar amount each customer has spent.
+
+    \begin{align*}
+      &Customer\_spend \leftarrow CUSTOMER * (_{\textit{CUSTOMER}} \Im_{SUM Actual\_Price}(PURCHASE))\\
+      &RESULT \leftarrow \Pi_{Name,SUM(Actual\_Price)}Customer\_spend
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_j.sql}
+
+  \item Provide a list of customer names and e-mail addresses for customers who have spent more than the average customer.
+
+    Return a table that contains the names and e-mail addresses of the customers who have spent more than the average customer
+
+    \begin{align*}
+      &\rho_{Total(Email,Total\_amount)}(_{\textit{CUSTOMER}}\mathcal{F}_{SUM Actual\_Price}(PURCHASE)); \\
+      &CUSINFO \leftarrow Total * CUSTOMER;\\
+      &RESULT \leftarrow \Pi_{Name, Email}(\sigma_{Total\_amount > AVG Total\_amount}(CUSINFO))
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_k.sql}
+
+
+  \item Provide a list of the titles in the database and associated total copies sold to customers, sorted from the title that has sold the most individual copies to the title that has sold the least.
+
+    Return a table that contains the total number of each book that has been sold to customers, and the titles of those books, sorted by the number of books in descending number.
+
+    \begin{align*}
+      &SOLD \leftarrow PURCHASE \bowtie_{Book = Isbn} BOOK \\
+      &COUNT \leftarrow _{Isbn} \Im_{COUNT Book} SOLD\\
+      &RESULT \leftarrow \Pi_{Title,COUNT Book} COUNT
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_l.sql}
+
+  \item Provide a list of the titles in the database and associated dollar totals for copies sold to customers, sorted from the title that has sold the highest dollar amount to the title that has sold the smallest.
+
+    Return a table that contains the total dollar amount of each book that has been sold to customers, and the titles of those books, sorted by the dollar amount in descending order.
+
+    \begin{align*}
+      &SOLD \leftarrow PURCHASE \bowtie_{Book = Isbn} BOOK \\
+      &\rho_{Total\_book(Isbn,count)} Isbn\Im_{COUNT(Book)}(SOLD)\\
+      &RESULT \leftarrow \Pi_{Title,Count * Actual\_Price}(Total\_book)
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_m.sql}
+
+  \item Find the most popular author in the database (i.e. the one who has sold the most books)
+
+    Return a table that contains the name of the author who sold the most books
+
+    \begin{align*}
+      &SOLD \leftarrow (PURCHASE \bowtie_{Book = Isbn} BOOK)\bowtie_{Book = Isbn}WRITES\\
+      &\rho_{R1(Total\_amount)}(_{AuthorId} \Im_{COUNT Book}(SOLD))\\
+      &RESULT \leftarrow Name \Im_{MAX(Total\_amount)}(R1)
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_n.sql}
+
+  \item Find the most profitable author in the database for this store (i.e. the one who has brought in the most money)
+
+    Return a table that contains the name of the author who brought in the most money and the dollar amount
+
+    \begin{align*}
+      &SOLD \leftarrow (PURCHASE \bowtie_{Book = Isbn} BOOK)\bowtie_{Book = Isbn}WRITES\\
+      &\rho_{R1(Total\_amount)}(_{AuthorId} \Im_{COUNT Book}(SOLD))\\
+      &MAX \leftarrow  \Im_{MAX(Actual\_Price*Total\_amount)}Total\_Dollar)*Total\_dollar\\
+      &RESULT \leftarrow \Pi_{Name,Actual\_Price*Total\_amount}MAX
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_o.sql}
+
+  \item Provide a list of customer information for customers who purchased anything written by the most profitable author in the database.
+
+    Return a table that contains the information of customers who purchased anything written by the most profitable author
+
+    \begin{align*}
+      &SOLD \leftarrow (PURCHASE \bowtie_{Book = Isbn} BOOK)\bowtie_{Book = Isbn}WRITES\\
+      &\rho_{R1(Total\_amount)}(_{AuthorId} \Im_{COUNT Book}(SOLD))\\
+      &Total\_dollar \leftarrow \Pi_{Name,AuthorId,Actual\_Price*Total\_amount}R1\\
+      &Max\_author \leftarrow (_{(Name, AuthorId)}\Im_{MAX(Actual\_Price*Total\_amount)}Total\_Dollar)\\
+      &CUS \leftarrow CUSTOMER \bowtie_{Email = Customer}PURCHASE\\
+      &Cust\_author \leftarrow (CUS \bowtie_{Book = Isbn}WRITES)*Max\_author\\
+      &RESULT \leftarrow \Pi_{Name,Email,Phone,Address}(Cust\_author)
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_p.sql}
+
+  \item Provide the list of authors who wrote the books purchased by the customers who have spent more than the average customer.
+
+    Return a table that contains the name of the authors whose books are purchased by the customers who have spent more than average customer
+
+    \begin{align*}
+      &Author\_sold \leftarrow(WRITES * AUTHOR)\bowtie_{Isbn = Book}PURCHASE\\
+      &\rho_{Spent(Email,total\_spent)}(customer \Im_{SUM Actual\_Price}PURCHASE)\\
+      &CUS \leftarrow \sigma_{total\_spent > AUG total\_spent}Spent\\
+      &RESULT \leftarrow Author\_sold \bowtie_{customer=Email}CUS
+    \end{align*}
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/query_q.sql}
+
   \end{enumerate}
+
+  \item INSERT Syntax
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/inserts.sql}
+
+  \item DELETE Syntax
+
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section2/deletes.sql}
+
 \end{enumerate}
 
 \end{document}
