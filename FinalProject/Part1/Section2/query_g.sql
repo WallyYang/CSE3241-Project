@@ -1,5 +1,3 @@
-SELECT Email, Name
-  FROM CUSTOMR C, ACCOUNT A
+SELECT C.Email, Name, MAX(A.Reward_point)
+  FROM CUSTOMER C, ACCOUNT A
  WHERE C.Email = A.Email
- GROUP BY C.Email, C.Name
-HAVING A.Reward_point = MAX(A.Reward_point)
