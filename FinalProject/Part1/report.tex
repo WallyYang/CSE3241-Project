@@ -289,7 +289,8 @@
     Return a table that contains the email and name of the customer who has the most reward point on his or her account
 
     \begin{align*}
-      &\textit{RESULT} \leftarrow \pi_{\textit{Email, Name}}(_{\textit{Email, Name}}\mathcal{F}_{\textit{MAX Reward\_point}}(\textit{CACCT}))
+      &R1 \leftarrow ACCOUNT * CUSTOMER\\
+      &\textit{RESULT} \leftarrow _{CUSTOMER.Email, CUSTOMER.Name}\Im_{MAX Reward\_point}(R1)
     \end{align*}
 
     \inputminted[
