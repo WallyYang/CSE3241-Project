@@ -1,4 +1,4 @@
-                                        CSE-3241 Project Table of Content
+                                        Bookstore Project Table of Content
 I. Database Description
   1. Location: Folder Part 1
   2. Overview: 
