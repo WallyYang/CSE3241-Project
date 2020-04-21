@@ -1,16 +1,18 @@
                                         Bookstore Project Table of Content
+Part1: See folder part1
+Final report: report.pdf
 I. Database Description
   1. Location: Folder Part 1
-  2. Overview: 
+  2. Overview:
     2.1. ER-model
     2.2. Relational Schema
-    2.3. Level of Normalization 
+    2.3. Level of Normalization
     2.4. Indices
     2.5. Views
     2.6. Sample Transactions
 II. User Manual
   1. Location: Folder Part 1 Section 2
-  2. Overview: 
+  2. Overview:
     2.1. Database Table Description
     2.2. Sample SQL Queries
     2.3. INSERT Syntax
@@ -29,7 +31,7 @@ IV. The SQL Database
     2.2. SQL CREATE
     2.3. DATA FILES
     2.4. SQL QUERIES
-    2.5. SQL INSERT 
+    2.5. SQL INSERT
     2.6. SQL DELETE
 V. Function Extensions
   1. Location: Folder Extension
@@ -37,3 +39,7 @@ V. Function Extensions
   3. How to run: open the "import_data.py", click "Run Module" to run the program
 VI. Final Report
   1. Location: Folder Part 1
+
+Part2: See folder part2
+Binary Database: bookstore.sqlite
+Data: See folder Data, all tables have separate CSV file, import will work
