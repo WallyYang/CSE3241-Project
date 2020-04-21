@@ -7,13 +7,6 @@ VALUES ('782140661',                        -- ISBN
         'Computer'                          -- Category
 );
 
--- Add INVENTORY information
-INSERT INTO INVENTORY
-VALUES ('782140661',                        -- ISBN
-        'warehouse',                        -- Location
-        100                                 -- Quantity
-);
-
 -- Insert the AUTHOR of the BOOK, give a unique author ID
 INSERT INTO AUTHOR
 VALUES (1, 'Chip Dawes');                   -- AuthorID & Author Name
