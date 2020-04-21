@@ -654,4 +654,115 @@ FIX:
 \item Checked
 \end{enumerate}
 
+\subsection{Checkpoint 3}
+
+\subsubsection{Part 1}
+\begin{itemize}
+  \item Updated ER Model
+
+    \includegraphics[width=\linewidth]{Section3/ER3.png}
+
+  \item Updated Relational Schema
+
+    \includegraphics[scale=0.3]{Section3/RS3.png}
+\end{itemize}
+
+\subsubsection{Part 2}
+
+\begin{enumerate}
+  \item Question 1
+  \inputminted[
+  style=monokai,
+  bgcolor=monokaibg,
+  linenos]
+  {sql}{Section3/Checkpoint3/Bookstore.sql}
+
+  \item Question 2
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section3/Checkpoint3/WorkSheetTwoSimpleQueries.sql}
+
+  \item Question 3
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section3/Checkpoint3/WorkSheetTwoExtraQueries.sql}
+
+  \item Question 4
+    \inputminted[
+    style=monokai,
+    bgcolor=monokaibg,
+    linenos]
+    {sql}{Section3/Checkpoint3/WorksheetTwoAdvancedQueries.sql}
+
+\end{enumerate}
+
+FIX:
+\begin{enumerate}
+  \item See section 2, page 6 for updated SQL
+  \item See section 2, page 6 for updated SQL
+  \item See section 2, page 6 for updated SQL
+  \item See section 2, page 6 for updated SQL
+  \item Checked
+\end{enumerate}
+
+\subsection{Checkpoint 4}
+\begin{enumerate}
+  \item Updated ER Model
+
+    \includegraphics[width=\linewidth]{Section3/ER3.png}
+
+  \item
+    \begin{itemize}
+    \item BOOK: \underline{Isbn} -> {Title, Year, Price, Category}
+    \item PUBLISHER: \underline{Name} -> {Address, Phone}
+    \item AUTHOR: \underline{AuthorId} -> Name
+    \item CUSTOMER: \underline{Email} -> {Name, Address, Phone}
+    \item ACCOUNT: \underline{Customer\_Email} -> {Membership, Reward\_Point, Recommandation\_List}
+    \item PURCHASE: \underline{Transaction\_Id} -> {Customer, Book, Card\_type, Date}
+    \item PUBLISHES: \underline{Isbn} -> {AuthorId, Publisher\_Name}
+    \item WRITES: \underline{Isbn} -> \underline{AuthorId}
+    \end{itemize}
+
+  \item
+    \begin{itemize}
+      \item Book: BCNF
+      \item Publisher: BCNF
+      \item Author: BCNF
+      \item Customer: BCNF
+      \item Account: BCNF
+      \item Purchases: BCNF
+      \item Publishes: BCNF
+      \item Writes: BCNF
+    \end{itemize}
+
+  \item N/A
+
+  \item Two Views:
+    \begin{enumerate}
+    \item View A
+
+      \inputminted[
+      style=monokai,
+      bgcolor=monokaibg,
+      linenos]
+      {sql}{Section3/Checkpoint4/view_a.sql}
+
+    \item View B
+
+      \inputminted[
+      style=monokai,
+      bgcolor=monokaibg,
+      linenos]
+      {sql}{Section3/Checkpoint4/view_b.sql}
+
+    \end{enumerate}
+\end{enumerate}
+
+FIX:
+N/A
+
 \end{document}
