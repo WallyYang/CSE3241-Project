@@ -1,4 +1,3 @@
-SELECT Isbn, Quantity*Price
+SELECT Isbn, SUM(Quantity * Price)
   FROM BOOK NATURAL JOIN INVENTORY
  GROUP BY Isbn
-HAVING Quantity*Price=SUM(Quantity);
