@@ -345,14 +345,16 @@
     linenos]
     {sql}{Section2/query_j.sql}
 
-  \item Provide a list of customer names and e-mail addresses for customers who have spent more than 50.
+  \item Provide a list of customer names and e-mail addresses for customers who
+    have spent more than the average customer.
 
-    Return a table that contains the names and e-mail addresses of the customers who have spent more than 50.
+    Return a table that contains the names and e-mail addresses of the customers
+    who have spent more than the average customer.
 
     \begin{align*}
       &\rho_{Total(Email,Total\_amount)}(_{\textit{CUSTOMER}}\mathcal{F}_{SUM Actual\_Price}(PURCHASE)); \\
       &CUSINFO \leftarrow Total * CUSTOMER;\\
-      &RESULT \leftarrow \Pi_{Name, Email}(\sigma_{Total\_amount > 50}(CUSINFO))
+      &RESULT \leftarrow \Pi_{Name, Email}(\sigma_{Total\_amount > AVG Actual\_Price}(CUSINFO))
     \end{align*}
 
     \inputminted[
