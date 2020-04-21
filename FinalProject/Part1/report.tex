@@ -194,9 +194,10 @@
 
     Return a table that contains the title of that books written by Pratchett and cost less than \$10
 
-    \begin{equation*}
-      BOOKS \leftarrow \Pi_{Title}(\sigma_{Price<10 AND Author = 'Pratchett'}(BOOK))
-    \end{equation*}
+    \begin{align*}
+      &\mathit{R1} \leftarrow \mathit{BOOK} * \mathit{WRITES} * \mathit{AUTHOR}\\
+      &\mathit{RESULT} \leftarrow \pi_{\mathit{Title}, \mathit{Name}}(\mathit{R1})
+    \end{align*}
 
     \inputminted[
     style=monokai,
@@ -204,7 +205,7 @@
     linenos]
     {sql}{Section2/query_a.sql}
 
-  \item Find the titles of all books by Pratchett that cost less than \$10
+  \item Give all the titles and their dates of purchase made by a single customer
 
     Return a table that contains the title and date of the purchases made by a single customer
 
